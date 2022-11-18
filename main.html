@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>shopping car</title>
+<script>
+function loadMsg() {
+	let dat={
+		p1: 10,
+		p2: "ok"
+	}
+	let action='g';
+	let mydat = new FormData();
+	mydat.append( "dat", JSON.stringify(dat) );
+	mydat.append( "o", action);
+
+	url="control.py";
+	fetch(url,{
+		method: 'POST', // or 'GET'
+		body: mydat
+	})
+	.then(function(res){
+		//return res.text();
+		return res.json();
+	})
+	.then(function(data){
+		
+		//example of returning results as text
+		/*
+		console.log(data)
+
+		let div=document.getElementById('guestbook');
+		div.innerHTML=data;*/		
+		
+		//example of returning results as a json object
+		dat = data.dat; //the dot format
+		list=data['list']; //the [] indexed format
+		console.log(dat,list);
+		let p="";
+		for (item of list) {
+			p += "<p>";
+			p += item.id + '. ' + item.name + ' ' + item.price + ' ' + item.amount;
+			p += "</p>";
+		}
+		let div=document.getElementById('goods');
+		div.innerHTML=p;
+
+	})
+}
+
+function likeit(id) {
+	let msgID=document.getElementById(id).value;
+	console.log(id,msgID)
+	let mydat = new FormData();
+	action='like';
+	mydat.append( "id", msgID);
+	mydat.append( "o", action);
+
+	url="control.py";
+	fetch(url,{
+		method: 'POST', // or 'GET'
+		body: mydat
+	})
+	.then(function(res){
+		return res.text();
+	})
+	.then(function(data){
+		console.log(data);
+		loadMsg();
+	})
+}
+
+function killit(id) {
+	let msgID=document.getElementById(id).value;
+	console.log(id,msgID)
+	let mydat = new FormData();
+	action='del';
+	mydat.append( "id", msgID);
+	mydat.append( "o", action);
+
+	url="control.py";
+	fetch(url,{
+		method: 'POST', // or 'GET'
+		body: mydat
+	})
+	.then(function(res){
+		return res.text();
+	})
+	.then(function(data){
+		console.log(data);
+		loadMsg();
+	})
+}
+
+function addincar(id) {
+	let msgID=document.getElementById(id).value;
+	console.log(id,msgID)
+	let mydat = new FormData();
+	action='like';
+	mydat.append( "id", msgID);
+	mydat.append( "o", action);
+
+	url="control.py";
+	fetch(url,{
+		method: 'POST', // or 'GET'
+		body: mydat
+	})
+	.then(function(res){
+		return res.text();
+	})
+	.then(function(data){
+		console.log(data);
+		loadMsg();
+	})
+}
+</script>
+</head>
+<body>
+	<!--<button onclick='loadMsg()'>商品</button>
+	<div class='myCSS' id='goods'></div>-->
+商城 <a href='login.html'> 新增商品 </a><hr>
+<form method="post" action="delMsg.py">
+商品編號: <input type='text' id='i' name='i'><input type='button' value='我kill' onclick="killit('i')">
+</form>
+商品數量: <input type='text' id='j' name='j'><input type='button' value='我愛' onclick="likeit('j')">
+<br>
+<button onclick='addincar()'>加入購物車</button>
+<hr>
+<button onclick='loadMsg()'>Load MSG</button>
+<div class='myCSS' id='goods'></div>
+</body>
+</html>

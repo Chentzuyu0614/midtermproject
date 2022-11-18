@@ -1,0 +1,64 @@
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.global.prod.js"></script>
+    -->
+    <script type="text/javascript" src="https://unpkg.com/vue@next"></script>
+    </head>
+    
+    <body >
+    <fieldset>
+        <legend>請輸入密碼</legend>
+    <div id="app">
+      <!--{{ message }}-->
+      <input type="text" v-Model='title'>
+        <!--<div>{{ title }}</div>-->
+        <div v-if="title == pwd">
+            <a href="addMsgForm.html">登入</a>
+        </div>
+        <div v-else>錯誤</div>
+        <!--<if title=pwd>
+            <a href="addMsgForm.html"></a>
+        </if>-->
+    </div>
+    </fieldset>
+    
+    <script language="javascript">
+    const vm1= Vue.createApp({
+        data() {
+            return {
+                message: '密碼: ',
+                title: 0,
+                pwd: 1234
+            }
+        }
+    }).mount('#app');
+    </script>
+</body></html>
+
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>登入</title>
+<script>
+function login(a,b) {
+	let result;
+    if (a == '123') {
+        result = 'positive';
+    } else {
+        result = 'NOT positive';
+        return result;
+    }
+}
+</script>
+</head>
+<body>
+帳號:<input type='text' id='i' name='i'>
+<br>
+密碼:<input type='text' id='j' name='j'>
+<hr>
+<button onclick='login(i,j)'>登入</button>
+<div class='myCSS' id='goods'></div>
+</body>
+</html>-->
