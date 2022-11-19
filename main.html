@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>shopping car</title>
+<title>OO商城</title>
 <script>
 function loadMsg() {
 	let dat={
@@ -24,15 +24,6 @@ function loadMsg() {
 		return res.json();
 	})
 	.then(function(data){
-		
-		//example of returning results as text
-		/*
-		console.log(data)
-
-		let div=document.getElementById('guestbook');
-		div.innerHTML=data;*/		
-		
-		//example of returning results as a json object
 		dat = data.dat; //the dot format
 		list=data['list']; //the [] indexed format
 		console.log(dat,list);
@@ -48,11 +39,11 @@ function loadMsg() {
 	})
 }
 
-function likeit(id) {
+function addcar(id) {
 	let msgID=document.getElementById(id).value;
 	console.log(id,msgID)
 	let mydat = new FormData();
-	action='like';
+	action='add';
 	mydat.append( "id", msgID);
 	mydat.append( "o", action);
 
@@ -66,11 +57,11 @@ function likeit(id) {
 	})
 	.then(function(data){
 		console.log(data);
-		loadMsg();
+		//loadMsg();
 	})
 }
 
-function killit(id) {
+function delcar(id) {
 	let msgID=document.getElementById(id).value;
 	console.log(id,msgID)
 	let mydat = new FormData();
@@ -88,46 +79,32 @@ function killit(id) {
 	})
 	.then(function(data){
 		console.log(data);
-		loadMsg();
-	})
-}
-
-function addincar(id) {
-	let msgID=document.getElementById(id).value;
-	console.log(id,msgID)
-	let mydat = new FormData();
-	action='like';
-	mydat.append( "id", msgID);
-	mydat.append( "o", action);
-
-	url="control.py";
-	fetch(url,{
-		method: 'POST', // or 'GET'
-		body: mydat
-	})
-	.then(function(res){
-		return res.text();
-	})
-	.then(function(data){
-		console.log(data);
-		loadMsg();
+		//loadMsg();
 	})
 }
 </script>
 </head>
 <body>
-	<!--<button onclick='loadMsg()'>商品</button>
-	<div class='myCSS' id='goods'></div>-->
 OO商城 <a href='login.html'> 庫存 </a><hr>
-<form method="post" action="delMsg.py">
-商品編號: <input type='text' id='i' name='i'><input type='button' value='我kill' onclick="killit('i')">
-</form>
-商品數量: <input type='text' id='j' name='j'><input type='button' value='我愛' onclick="likeit('j')">
-<br><br>
-<button onclick='addincar()'>加入購物車</button>
+商品編號: <input type='text' id='i' name='i'><br>
+<!--商品數量: <input type='text' name='j'><br>
+<button onclick="submit">加入購物車</button>-->
+<input type='button' value='加入購物車' onclick="addcar('i')">
+<input type='button' value='移出購物車' onclick="delcar('i')">
 <a href='car.html'> 查看購物車 </a>
 <hr>
 <button onclick='loadMsg()'>商品列表</button>
 <div class='myCSS' id='goods'></div>
 </body>
 </html>
+
+<!--
+<form method="post" action="add.py">
+商品編號: <input type='text' id='i' name='i'>
+商品數量: <input type='text' id='j' name='j'><br>
+<button onclick="addincar('i')">加入購物車</button>
+商品<input type="text" name='name'><br>
+價格<input type="text" name='price'><br>
+數量<input type="text" name='amount'><br>
+<input type="submit">
+</form>-->

@@ -24,6 +24,9 @@ def likeit(xid):
 def killit(xid):
 	msgModel.kill(xid)
 
+def car(xid):
+	msgModel.car(xid)
+
 #main starts here
 form = cgi.FieldStorage()
 
@@ -38,9 +41,12 @@ para=()
 if act=='g': #get one record by xid
 	result=genList()
 	print(json.dumps(result,ensure_ascii=True)) #dump json string to client
-elif act=='like':
+elif act=='add':
 	mid=int(form.getvalue('id'))
 	likeit(mid)
 elif act=='del':
 	mid=int(form.getvalue('id'))
-	msgModel.kill(mid)
+	killit(mid)
+elif act=='car':
+	mid=int(form.getvalue('id'))
+	car(mid)
