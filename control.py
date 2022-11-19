@@ -21,6 +21,9 @@ def genList():
 def likeit(xid):
 	msgModel.like(xid)
 
+def killit(xid):
+	msgModel.kill(xid)
+
 #main starts here
 form = cgi.FieldStorage()
 

@@ -48,28 +48,6 @@ function loadMsg() {
 	})
 }
 
-function likeit(id) {
-	let msgID=document.getElementById(id).value;
-	console.log(id,msgID)
-	let mydat = new FormData();
-	action='like';
-	mydat.append( "id", msgID);
-	mydat.append( "o", action);
-
-	url="control.py";
-	fetch(url,{
-		method: 'POST', // or 'GET'
-		body: mydat
-	})
-	.then(function(res){
-		return res.text();
-	})
-	.then(function(data){
-		console.log(data);
-		loadMsg();
-	})
-}
-
 function killit(id) {
 	let msgID=document.getElementById(id).value;
 	console.log(id,msgID)
@@ -92,42 +70,14 @@ function killit(id) {
 	})
 }
 
-function addincar(id) {
-	let msgID=document.getElementById(id).value;
-	console.log(id,msgID)
-	let mydat = new FormData();
-	action='like';
-	mydat.append( "id", msgID);
-	mydat.append( "o", action);
-
-	url="control.py";
-	fetch(url,{
-		method: 'POST', // or 'GET'
-		body: mydat
-	})
-	.then(function(res){
-		return res.text();
-	})
-	.then(function(data){
-		console.log(data);
-		loadMsg();
-	})
-}
 </script>
 </head>
 <body>
-	<!--<button onclick='loadMsg()'>商品</button>
-	<div class='myCSS' id='goods'></div>-->
-OO商城 <a href='login.html'> 庫存 </a><hr>
-<form method="post" action="delMsg.py">
-商品編號: <input type='text' id='i' name='i'><input type='button' value='我kill' onclick="killit('i')">
+<form method="post" action="delete.py">
+商品編號: <input type='text' id='i' name='i'><input type='button' value='刪除' onclick="killit('i')">
 </form>
-商品數量: <input type='text' id='j' name='j'><input type='button' value='我愛' onclick="likeit('j')">
-<br><br>
-<button onclick='addincar()'>加入購物車</button>
-<a href='car.html'> 查看購物車 </a>
-<hr>
 <button onclick='loadMsg()'>商品列表</button>
+<a href='main.html'> 回商城 </a><hr>
 <div class='myCSS' id='goods'></div>
 </body>
 </html>
