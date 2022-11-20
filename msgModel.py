@@ -3,7 +3,7 @@ from dbConfig import conn, cur
 
 def getList():
 	#查詢 select id, title,msg, nickname,likes from guestbook order by likes desc;
-	sql="select id, name, price, amount from goods order by likes desc;"
+	sql="select id, name, price, amount from goods order by amount desc;"
 	cur.execute(sql)
 	
 	records = cur.fetchall()
